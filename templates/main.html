@@ -14,9 +14,6 @@
 	<div id="container">
 		<div id="topScrollFrame">
 			<div id="topScrollButtonLeft">
-				<span class="smalltext">Step 1 : Allow<br>Cam Above</span>
-				<button id="snapFront">Step 2 : Snap Front Photo</button>
-				<button id="snapBack">Step 3 : Snap Back Photo</button>
 				<button id="convertFront">Step 3 : Make Pdf</button>
 				
 
@@ -110,7 +107,7 @@ window.addEventListener("DOMContentLoaded", function() {
 			console.log("Video capture error: ", error.code); 
 		};
 
-document.getElementById("snapFront").addEventListener("click", function() {
+document.getElementById("canvasFront").addEventListener("click", function() {
 
 	// context.drawImage(video, 0, 0, 640, 400);
 	var rawImage = contextFront.drawImage(video,0, 0, 400, 300);
@@ -127,7 +124,7 @@ document.getElementById("snapFront").addEventListener("click", function() {
 
 });
 
-document.getElementById("snapBack").addEventListener("click", function() {
+document.getElementById("canvasBack").addEventListener("click", function() {
 
 	// context.drawImage(video, 0, 0, 640, 400);
 	var rawImage = contextBack.drawImage(video,0, 0, 400, 300);

@@ -9,11 +9,15 @@ body{
 
 canvas{
 	margin-top:110;
-	background-image:url("../img/whiteMugFront.png");
-	background-repeat: no-repeat;
 	/*background-color:Silver;*/
 	display:inline;
 }
+
+#canvasBack,
+#canvasFront { cursor: pointer; }
+#canvasBack { background: url('../img/takePicBack.png') 0 0 no-repeat; }
+#canvasFront { background: url('../img/takePicFront.png') 0 0 no-repeat; }
+
 video{
 	margin-top:110;
 	background-color:Silver;
