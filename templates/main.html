@@ -12,25 +12,17 @@
 <body>
 
 	<div id="container">
+		<h1> 1 MINUTE MUG ON A MUG</h1>
+		
+		<!--
 		<div id="topScrollFrame">
-			<div id="topScrollButtonLeft">
-				<span class="smalltext">Step 1 : Allow<br>Cam Above</span>
-				<button id="snapFront">Step 2 : Snap Front Photo</button>
-				<button id="snapBack">Step 3 : Snap Back Photo</button>
-				<button id="convertFront">Step 3 : Make Pdf</button>
-				
-
-				<!-- <a href="#" class="btn btn-primary download-pdf">Download PDF</a> -->
-			</div>
-
-			<div id="projectTitle">
-				<h1> 1 MINUTE MUG ON A MUG</h1>
-			</div>
-
-
 			<div id="topScrollArtZone">
 
+<<<<<<< HEAD
 <!-- 				<ul id="stickerPack">
+=======
+ 				<ul id="stickerPack">
+>>>>>>> origin/takepicturebtn
 					<li class="stickerToPick"><img src="src/img/placeholder.gif"></li>
 					<li class="stickerToPick"><img src="src/img/placeholder.gif"></li>
 					<li class="stickerToPick"><img src="src/img/placeholder.gif"></li>
@@ -41,17 +33,18 @@
 					<li class="stickerToPick"><img src="src/img/placeholder.gif"></li>
 					<li class="stickerToPick"><img src="src/img/placeholder.gif"></li>
 					<li class="stickerToPick"><img src="src/img/placeholder.gif"></li>
-				</ul> -->
+				</ul>
 			</div>
-		</div>
+		</div>-->
 		<!-- <div id="compositionCanvas"> -->
 
 
-
+		<div id="screens">
 			<video id="video" width="400" height="300" autoplay></video>
 
 			<canvas id="canvasFront" width="400" height="300"></canvas>
 			<canvas id="canvasBack" width="400" height="300"></canvas>
+		</div>
 <!-- 
 			<div id="projectShot">
 			
@@ -108,7 +101,7 @@ window.addEventListener("DOMContentLoaded", function() {
 			console.log("Video capture error: ", error.code); 
 		};
 
-document.getElementById("snapFront").addEventListener("click", function() {
+document.getElementById("canvasFront").addEventListener("click", function() {
 
 	// context.drawImage(video, 0, 0, 640, 400);
 	var rawImage = contextFront.drawImage(video,0, 0, 400, 300);
@@ -125,7 +118,7 @@ document.getElementById("snapFront").addEventListener("click", function() {
 
 });
 
-document.getElementById("snapBack").addEventListener("click", function() {
+document.getElementById("canvasBack").addEventListener("click", function() {
 
 	// context.drawImage(video, 0, 0, 640, 400);
 	var rawImage = contextBack.drawImage(video,0, 0, 400, 300);
@@ -142,7 +135,7 @@ document.getElementById("snapBack").addEventListener("click", function() {
 
 });
  
-document.getElementById("convertFront").addEventListener("click",function(){
+/*document.getElementById("convertFront").addEventListener("click",function(){
 	var canvasFront = document.getElementById("canvasFront");
 	var imgData    = canvasFront.toDataURL('image/jpeg');
 
@@ -153,7 +146,7 @@ document.getElementById("convertFront").addEventListener("click",function(){
 	doc.addImage(imgData, 'JPEG', 28, 30, 447.65, 264.33);//447.65 264.33
 	doc.save('Test.pdf');
 
-});
+});*/
 
 // document.getElementById("convertBack").addEventListener("click",function(){
 // 	var canvasBack = document.getElementById("canvasBack");
