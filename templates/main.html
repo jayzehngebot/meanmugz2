@@ -3,8 +3,8 @@
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 	<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
 	<script src="{{ url_for('static', filename='js/jquery.blackandwhite.js') }}"></script>
-		<script src="{{ url_for('static', filename='js/jspdf.min.js') }}"></script>
-			<script src="{{ url_for('static', filename='js/libs/FileSaver.js/FileSaver.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/jspdf-jz.js') }}"></script>
+			<!--<script src="{{ url_for('static', filename='js/libs/FileSaver.js/FileSaver.js') }}"></script>-->
 
 	<link href='http://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
 	
@@ -29,8 +29,6 @@
 
 
 			<div id="topScrollArtZone">
-
-
 
 <!-- 				<ul id="stickerPack">
 					<li class="stickerToPick"><img src="src/img/placeholder.gif"></li>
@@ -149,9 +147,10 @@ document.getElementById("convertFront").addEventListener("click",function(){
 	var imgData    = canvasFront.toDataURL('image/jpeg');
 
 	console.log(imgData);
+	// var doc = new jsPDF();
 	
-	var doc = new jsPDF();
-	doc.addImage(imgData, 'JPEG', 0, 0, 180, 160);
+	var doc = new jsPDF('l','pt','mug');
+	doc.addImage(imgData, 'JPEG', 28, 30, 447.65, 264.33);//447.65 264.33
 	doc.save('Test.pdf');
 
 });

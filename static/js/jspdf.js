@@ -348,7 +348,12 @@ PubSub implementation
                 'a4': [595.28, 841.89],
                 'a5': [420.94, 595.28],
                 'letter': [612, 792],
-                'legal': [612, 1008]
+                'legal': [612, 1008],
+                'mug': [618,267.667] // added mug format for lob
+
+
+
+
             },
             textColor = '0 g',
             drawColor = '0 G',
