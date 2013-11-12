@@ -1,0 +1,189 @@
+<html>
+<head>
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+	<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/jquery.blackandwhite.js') }}"></script>
+		<script src="{{ url_for('static', filename='js/jspdf.min.js') }}"></script>
+			<script src="{{ url_for('static', filename='js/libs/FileSaver.js/FileSaver.js') }}"></script>
+
+	<link href='http://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
+	
+</head>
+<body>
+
+	<div id="container">
+		<div id="topScrollFrame">
+			<div id="topScrollButtonLeft">
+				<span class="smalltext">Step 1 : Allow<br>Cam Above</span>
+				<button id="snapFront">Step 2 : Snap Front Photo</button>
+				<button id="snapBack">Step 3 : Snap Back Photo</button>
+				<button id="convertFront">Step 3 : Make Pdf</button>
+				
+
+				<!-- <a href="#" class="btn btn-primary download-pdf">Download PDF</a> -->
+			</div>
+
+			<div id="projectTitle">
+				<h1> 1 MINUTE MUG ON A MUG</h1>
+			</div>
+
+
+			<div id="topScrollArtZone">
+
+
+
+<!-- 				<ul id="stickerPack">
+					<li class="stickerToPick"><img src="src/img/placeholder.gif"></li>
+					<li class="stickerToPick"><img src="src/img/placeholder.gif"></li>
+					<li class="stickerToPick"><img src="src/img/placeholder.gif"></li>
+					<li class="stickerToPick"><img src="src/img/placeholder.gif"></li>
+					<li class="stickerToPick"><img src="src/img/placeholder.gif"></li>
+					<li class="stickerToPick"><img src="src/img/placeholder.gif"></li>
+					<li class="stickerToPick"><img src="src/img/placeholder.gif"></li>
+					<li class="stickerToPick"><img src="src/img/placeholder.gif"></li>
+					<li class="stickerToPick"><img src="src/img/placeholder.gif"></li>
+					<li class="stickerToPick"><img src="src/img/placeholder.gif"></li>
+				</ul> -->
+			</div>
+		</div>
+		<!-- <div id="compositionCanvas"> -->
+
+
+
+			<video id="video" width="400" height="300" autoplay></video>
+
+			<canvas id="canvasFront" width="400" height="300"></canvas>
+			<canvas id="canvasBack" width="400" height="300"></canvas>
+<!-- 
+			<div id="projectShot">
+			
+				<img src="{{ url_for('static', filename='img/whiteMugFront.png') }}">
+				<img src="{{ url_for('static', filename='img/whiteMugBack.png') }}">
+			</div>
+
+			 -->
+
+			<hr>
+
+		<div id="formzone" class="smallText">
+			<form method="POST" action="/">
+				Name : <input type="text" name="user_name" size="25" value="">
+				Address Line 1 : <input type="address01" name="address01" size="25" value="">
+				Address Line 2 : <input type="address02" name="address02" size="25" value=""><br>&nbsp;<br>
+				City :  <input type="text" name="city" size="25" value="">
+				State :  <input type="text" name="state" size="25" value="">
+				Zip :  <input type="text" name="zip" size="25" value="">
+<br>&nbsp;<br>
+				<button id="verify">Step 4 : Save and Verify Address </button>
+				<hr>
+				<span class="smallText">Step 5 : Checkout (Profit?)<span><br>&nbsp;<br>
+				<img alt="Check out with PayPal" src="https://www.paypal.com/en_US/i/btn/btn_xpressCheckoutsm.gif" title="Check out with PayPal">
+			</form>
+
+		</div>
+
+		<!-- </div> -->
+		
+
+
+	</div>
+
+
+<script>
+
+$(document).ready(function(){
+	    $('.bwWrapper').BlackAndWhite({
+			hoverEffect : true,
+	    });
+});
+// Put event listeners into place
+window.addEventListener("DOMContentLoaded", function() {
+
+	// Grab elements, create settings, etc.
+	var canvasFront = document.getElementById("canvasFront"),
+		canvasBack = document.getElementById("canvasBack"),
+		contextFront = canvasFront.getContext("2d"),
+		contextBack = canvasBack.getContext("2d"),
+		video = document.getElementById("video"),
+		videoObj = { "video": true },
+		errBack = function(error) {
+			console.log("Video capture error: ", error.code); 
+		};
+
+document.getElementById("snapFront").addEventListener("click", function() {
+
+	// context.drawImage(video, 0, 0, 640, 400);
+	var rawImage = contextFront.drawImage(video,0, 0, 400, 300);
+	var imgd = contextFront.getImageData(0, 0, 400, 300);
+	var pix = imgd.data;
+	for (var i = 0, n = pix.length; i < n; i += 4) {
+	var grayscale = pix[i  ] * .3 + pix[i+1] * .59 + pix[i+2] * .11;
+	pix[i  ] = grayscale; 	// red
+	pix[i+1] = grayscale; 	// green
+	pix[i+2] = grayscale; 	// blue
+	// alpha
+	}
+	contextFront.putImageData(imgd, 0, 0);
+
+});
+
+document.getElementById("snapBack").addEventListener("click", function() {
+
+	// context.drawImage(video, 0, 0, 640, 400);
+	var rawImage = contextBack.drawImage(video,0, 0, 400, 300);
+	var imgd = contextBack.getImageData(0, 0, 400, 300);
+	var pix = imgd.data;
+	for (var i = 0, n = pix.length; i < n; i += 4) {
+	var grayscale = pix[i  ] * .3 + pix[i+1] * .59 + pix[i+2] * .11;
+	pix[i  ] = grayscale; 	// red
+	pix[i+1] = grayscale; 	// green
+	pix[i+2] = grayscale; 	// blue
+	// alpha
+	}
+	contextBack.putImageData(imgd, 0, 0);
+
+});
+ 
+document.getElementById("convertFront").addEventListener("click",function(){
+	var canvasFront = document.getElementById("canvasFront");
+	var imgData    = canvasFront.toDataURL('image/jpeg');
+
+	console.log(imgData);
+	
+	var doc = new jsPDF();
+	doc.addImage(imgData, 'JPEG', 0, 0, 180, 160);
+	doc.save('Test.pdf');
+
+});
+
+// document.getElementById("convertBack").addEventListener("click",function(){
+// 	var canvasBack = document.getElementById("canvasBack");
+// 	var imgData    = canvasBack.toDataURL('image/jpeg');
+
+// 	console.log(imgData);
+	
+// 	var doc = new jsPDF();
+// 	doc.addImage(imgData, 'JPEG', 0, 0, 180, 160);
+// 	doc.save('Test.pdf');
+
+// });
+
+	// Put video listeners into place
+	if(navigator.getUserMedia) { // Standard
+		navigator.getUserMedia(videoObj, function(stream) {
+			video.src = stream;
+			video.play();
+		}, errBack);
+	} else if(navigator.webkitGetUserMedia) { // WebKit-prefixed
+		navigator.webkitGetUserMedia(videoObj, function(stream){
+			video.src = window.webkitURL.createObjectURL(stream);
+			video.play();
+		}, errBack);
+	}
+}, false);
+
+
+
+</script>
+</body>
+</html>
